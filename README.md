@@ -4,7 +4,7 @@
 
 1. **Clone the Repository**:
    ```bash
-   git clone (https://github.com/maudoodfareed/Health-Test.git)
+   git clone https://github.com/maudoodfareed/Health-Test.git
    cd blood-metrics-dashboard
    ```
 
