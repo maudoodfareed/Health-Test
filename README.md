@@ -36,8 +36,6 @@
   - A1C >= 6.5%
   - LDL >= 160 mg/dL
   - Glucose >= 126 mg/dL
-- OpenAI API key is stored directly in the frontend code (not secure for production).
-- The patient data is static and defined within the code.
 
 ## Implementation Choices
 
