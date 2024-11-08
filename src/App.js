@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, CircularProgress } from '@mui/material';
 import axios from 'axios';
 
-
-
-
-// Sample data provided in the prompt
+// Sample data
 const sampleData = [
   { id: '001', date: '2023-07-01', a1c: 5.6, ldl: 120, glucose: 98 },
   { id: '002', date: '2023-06-15', a1c: 6.1, ldl: 145, glucose: 110 },
@@ -19,21 +16,19 @@ const thresholds = {
   glucose: 126,
 };
 
-// Function to check if a value is at high risk
 const isHighRisk = (metric, value) => {
   return value >= thresholds[metric];
 };
 
 const BloodMetricsDashboard = () => {
-  const [summary, setSummary] = useState(''); // State to store the GPT summary
-  const [loading, setLoading] = useState(false); // State to handle loading indicator
+  const [summary, setSummary] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  // Function to call OpenAI API and get the summary
+
   const getSummary = async () => {
-    setLoading(true); // Start loading
-    setSummary(''); // Clear previous summary
+    setLoading(true);
+    setSummary('');
 
-    // Prepare the data to be sent to GPT
     const messages = [
       { role: "system", content: "You are a helpful assistant." },
       {
@@ -67,13 +62,12 @@ const BloodMetricsDashboard = () => {
         }
       );
 
-      // Set the summary received from GPT
       setSummary(response.data.choices[0].message.content.trim());
     } catch (error) {
       console.error('Error fetching data from OpenAI API:', error);
       setSummary('Failed to fetch summary. Please try again.');
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false);
     }
   };
 
@@ -117,7 +111,6 @@ const BloodMetricsDashboard = () => {
         </Table>
       </TableContainer>
 
-      {/* Button to summarize risk */}
       <Button
         variant="contained"
         color="error"
@@ -128,7 +121,6 @@ const BloodMetricsDashboard = () => {
         Risk Analysis
       </Button>
 
-      {/* Loading indicator */}
       {loading && (
         <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center' }}>
           <CircularProgress size={24} style={{ marginRight: '10px' }} />
@@ -136,7 +128,6 @@ const BloodMetricsDashboard = () => {
         </div>
       )}
 
-      {/* Display the summary from GPT */}
       {summary && !loading && (
         <Typography variant="h6" style={{ marginTop: '20px' }}>
           Risk Summary From GPT:
